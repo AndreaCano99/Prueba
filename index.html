@@ -985,6 +985,23 @@
           <input id="qStarCheck" type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--accent);">
           <span>Marcar como imprescindible ⭐</span>
         </label>
+        <div>
+          <label class="form-label" for="qNumTypeSelect">¿Afecta a la calculadora?</label>
+          <select id="qNumTypeSelect" class="ios-input">
+            <option value="">Solo nota / sin cálculo</option>
+            <option value="per_guest">Precio por comensal (€ × invitados)</option>
+            <option value="menu_adult">Menú adulto (€ × adultos)</option>
+            <option value="menu_kid">Menú infantil (€ × niños)</option>
+            <option value="celiac_extra">Suplemento celíaco (€ × 1 celíaca)</option>
+            <option value="extra_hour">Hora extra (€ × horas extra)</option>
+            <option value="fixed_cost">Gasto fijo / canon / Plan B (€ una vez)</option>
+            <option value="min_guests">Mínimo de adultos (nº mínimo)</option>
+          </select>
+        </div>
+        <div id="qNumLabelWrap">
+          <label class="form-label" for="qNumLabelInput">Etiqueta del campo numérico</label>
+          <input id="qNumLabelInput" class="ios-input" type="text" placeholder="Ej. € / comensal o € extra">
+        </div>
         <div id="qDeleteRow" style="display: none;">
           <button type="button" id="qDeleteBtn" data-action="delete-custom-question" style="width: 100%; min-height: 42px; border-radius: 11px; background: var(--no-bg); color: var(--no-text); font-weight: 600; font-size: 13.5px;">
             Eliminar pregunta personalizada
@@ -1231,25 +1248,46 @@
         return Number.isFinite(v) ? v : 0;
       };
 
-      const menuAdult = numVal('q_pre_1');
-      const menuKid = numVal('q_pre_2');
-      const minAdults = numVal('q_pb_2');
-      const rentCost = numVal('q_ocu_1');
-      const hiddenExtras = numVal('q_ocu_2');
-      const djCost = numVal('q_ocu_3');
-      const planBCost = numVal('q_pb_3');
-      const extraHourCost = numVal('q_fec_3');
-      const celiacExtra = numVal('q_cel_3');
+      const numValByType = (targetType) => {
+        return state.questions
+          .filter(q => q.numType === targetType)
+          .reduce((acc, q) => acc + numVal(q.id), 0);
+      };
+
+      const perGuestPrice = numValByType('per_guest');
+      const menuAdult = numValByType('menu_adult');
+      const menuKid = numValByType('menu_kid');
+      const minAdults = numValByType('min_guests');
+      const celiacPerPerson = numValByType('celiac_extra');
+      const extraHourCost = numValByType('extra_hour');
+      const fixedCosts =
+        numValByType('fixed_cost') +
+        numValByType('rent_cost') +
+        numValByType('hidden_extras') +
+        numValByType('dj_cost') +
+        numValByType('planb_cost');
 
       const billedAdults = Math.max(state.simAdults || 0, minAdults);
       const kids = Math.max(state.simKids || 0, 0);
+      const totalGuests = billedAdults + kids;
       const extraHours = Math.max(state.simExtraHours || 0, 0);
 
-      const menusSubtotal = (billedAdults * menuAdult) + (kids * menuKid) + celiacExtra;
-      const fixedExtras = rentCost + hiddenExtras + djCost + planBCost + (extraHours * extraHourCost);
-      const vatAmount = state.simApplyVat ? ((menusSubtotal * 0.10) + (fixedExtras * 0.21)) : 0;
+      // Cálculo de menús y precios por comensal (incluye 1 menú celíaco adaptado por defecto)
+      const menusSubtotal =
+        (billedAdults * menuAdult) +
+        (kids * menuKid) +
+        (totalGuests * perGuestPrice) +
+        celiacPerPerson;
+
+      // Extras fijos + horas extra + Plan B / canon
+      const fixedExtras = fixedCosts + (extraHours * extraHourCost);
+
+      // IVA aplicado de forma reactiva sobre menús (10%) y extras/alquiler/fiesta (21%)
+      const vatRateMenus = state.simApplyVat ? 0.10 : 0;
+      const vatRateExtras = state.simApplyVat ? 0.21 : 0;
+      const vatAmount = (menusSubtotal * vatRateMenus) + (fixedExtras * vatRateExtras);
+
       const estimatedTotal = Math.round(menusSubtotal + fixedExtras + vatAmount);
-      const totalGuests = billedAdults + kids;
       const perGuest = totalGuests > 0 ? Math.round(estimatedTotal / totalGuests) : 0;
 
       return {
@@ -1777,6 +1815,10 @@
       document.getElementById('qTextInput').value = isEditing ? (q.text || '') : '';
       document.getElementById('qHintInput').value = isEditing ? (q.hint || '') : '';
       document.getElementById('qStarCheck').checked = isEditing ? Boolean(q.starred) : true;
+      document.getElementById('qNumTypeSelect').value = isEditing ? (q.numType || '') : 'per_guest';
+      document.getElementById('qNumLabelInput').value = isEditing
+        ? (q.numLabel || '')
+        : '€ / comensal';
       document.getElementById('qSubmitBtn').textContent = isEditing ? 'Guardar cambios' : 'Añadir';
 
       const deleteRow = document.getElementById('qDeleteRow');
@@ -1987,6 +2029,26 @@
       const el = ev.target;
       if (!el) return;
 
+      if (el.id === 'qNumTypeSelect') {
+        const labelInput = document.getElementById('qNumLabelInput');
+        if (labelInput) {
+          const defaultLabels = {
+            '': '',
+            'per_guest': '€ / comensal',
+            'menu_adult': '€ menú adulto',
+            'menu_kid': '€ menú niño',
+            'celiac_extra': '€ extra celíaca',
+            'extra_hour': '€/hora extra',
+            'fixed_cost': '€ gasto fijo',
+            'min_guests': 'Mín. adultos'
+          };
+          if (!labelInput.value.trim() || Object.values(defaultLabels).includes(labelInput.value.trim())) {
+            labelInput.value = defaultLabels[el.value] || '€';
+          }
+        }
+        return;
+      }
+
       if (el.dataset.inputRole === 'note' || el.dataset.inputRole === 'num') {
         const fId = el.dataset.fincaId;
         const qId = el.dataset.qId;
@@ -2054,6 +2116,9 @@
         const category = document.getElementById('qCatSelect').value || 'precios';
         const hint = document.getElementById('qHintInput').value.trim();
         const starred = document.getElementById('qStarCheck').checked;
+        const numType = document.getElementById('qNumTypeSelect').value || '';
+        const rawLabel = document.getElementById('qNumLabelInput').value.trim();
+        const numLabel = numType ? (rawLabel || '€') : '';
 
         if (editId) {
           const idx = state.questions.findIndex(item => item.id === editId);
@@ -2063,7 +2128,9 @@
               category,
               text,
               hint,
-              starred
+              starred,
+              numType,
+              numLabel
             };
           }
           persistState('Pregunta actualizada');
@@ -2074,7 +2141,8 @@
             text,
             hint,
             starred,
-            numType: ''
+            numType,
+            numLabel
           });
           persistState('Pregunta añadida');
         }

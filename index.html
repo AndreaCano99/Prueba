@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Fincas Boda">
+  <meta name="theme-color" content="#F6F5F2">
+  <title>Fincas Boda · 30/31 Oct 2027</title>
+
+  <style>
+    /* ==========================================================================
+       1. VARIABLES, RESET Y ESTILOS NATIVOS iOS (100% AUTOCONTENIDO SIN CDNs)
+       ========================================================================== */
+    :root {
+      --bg-page: #F6F5F2;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #EFEDE8;
+      --bg-input: #F9F8F6;
+      --primary: #2F5D50;
+      --primary-light: #E7F0ED;
+      --accent: #C97A63;
+      --accent-light: #F9ECE8;
+      --gold: #B8860B;
+      --gold-light: #FDF6E2;
+      --text-main: #1C1C1E;
+      --text-secondary: #636366;
+      --text-tertiary: #8E8E93;
+      --border-subtle: rgba(0, 0, 0, 0.07);
+      --border-strong: rgba(0, 0, 0, 0.13);
+      --yes-bg: #E5F4EC;
+      --yes-text: #1B6B43;
+      --maybe-bg: #FEF3DC;
+      --maybe-text: #9A6300;
+      --no-bg: #FDE8E8;
+      --no-text: #B42318;
+      --sat: env(safe-area-inset-top, 0px);
+      --sab: env(safe-area-inset-bottom, 0px);
+      --sal: env(safe-area-inset-left, 0px);
+      --sar: env(safe-area-inset-right, 0px);
+      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "New York", Georgia, "Times New Roman", serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100dvh;
+      min-height: 100%;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body {
+      padding-top: calc(64px + var(--sat));
+      padding-bottom: calc(84px + var(--sab));
+      padding-left: var(--sal);
+      padding-right: var(--sar);
+    }
+
+    /* Prevención estricta de auto-zoom en Safari iOS */
+    input, select, textarea, button {
+      font-family: inherit;
+      font-size: 16px;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      color: inherit;
+      transition: transform 0.14s ease, opacity 0.14s ease, background-color 0.15s ease;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    /* ==========================================================================
+       2. BARRA SUPERIOR (HEADER) Y TAB BAR INFERIOR iOS
+       ========================================================================== */
+    .ios-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      background: rgba(246, 245, 242, 0.9);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding-top: var(--sat);
+      padding-left: max(16px, var(--sal));
+      padding-right: max(16px, var(--sar));
+    }
+
+    .header-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .header-subtitle {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    .header-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.15;
+      color: var(--text-main);
+    }
+
+    .btn-primary-sm {
+      background: var(--primary);
+      color: #FFFFFF;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(47, 93, 80, 0.22);
+      white-space: nowrap;
+    }
+
+    .ios-tabbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.92);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border-subtle);
+      padding-bottom: var(--sab);
+      padding-left: var(--sal);
+      padding-right: var(--sar);
+    }
+
+    .tabbar-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      height: 62px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      color: var(--text-tertiary);
+      font-size: 11px;
+      font-weight: 600;
+      min-height: 48px;
+    }
+
+    .tab-item.active {
+      color: var(--primary);
+    }
+
+    .tab-item svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 2;
+    }
+
+    /* ==========================================================================
+       3. CONTENEDOR PRINCIPAL, TARJETAS Y UTILIDADES
+       ========================================================================== */
+    .main-container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 14px 16px 24px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .notice-banner {
+      background: var(--gold-light);
+      border: 1px solid rgba(184, 134, 11, 0.25);
+      color: #6B4E00;
+      border-radius: 14px;
+      padding: 11px 14px;
+      font-size: 13px;
+      line-height: 1.4;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .info-banner {
+      background: var(--primary-light);
+      border: 1px solid rgba(47, 93, 80, 0.16);
+      color: #1F4037;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    .grid-fincas {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 720px) {
+      .grid-fincas {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .header-title {
+        font-size: 27px;
+      }
+    }
+
+    /* Tarjeta de Finca */
+    .finca-card {
+      background: var(--bg-card);
+      border-radius: 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.035);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .finca-top-bar {
+      height: 5px;
+      width: 100%;
+    }
+
+    .finca-body {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .finca-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .finca-name {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      margin: 4px 0 2px;
+      color: var(--text-main);
+    }
+
+    .finca-meta {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
+    }
+
+    .icon-btn-round {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .icon-btn-round.danger {
+      background: var(--no-bg);
+      color: var(--no-text);
+    }
+
+    .finca-note-box {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .finca-metrics {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-subtle);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--bg-subtle);
+      overflow: hidden;
+      margin: 5px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .budget-pill-box {
+      background: var(--bg-subtle);
+      border-radius: 12px;
+      padding: 8px 10px;
+      text-align: right;
+    }
+
+    .btn-card-action {
+      margin-top: 14px;
+      width: 100%;
+      min-height: 46px;
+      border-radius: 13px;
+      color: #FFFFFF;
+      font-size: 15px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    /* ==========================================================================
+       4. PÍLDORAS DESLIZABLES Y CUESTIONARIO DE VISITA
+       ========================================================================== */
+    .h-scroll-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+      scrollbar-width: none;
+    }
+    .h-scroll-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .finca-pill {
+      flex-shrink: 0;
+      min-height: 42px;
+      padding: 0 14px;
+      border-radius: 13px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .finca-pill.active {
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    .filter-chip {
+      flex-shrink: 0;
+      min-height: 36px;
+      padding: 0 12px;
+      border-radius: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .filter-chip.active {
+      background: var(--text-main);
+      color: #FFFFFF;
+      border-color: var(--text-main);
+    }
+
+    .filter-chip.active-accent {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+    }
+
+    .cat-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 18px 0 10px;
+    }
+
+    .cat-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .cat-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
+      padding: 15px;
+      margin-bottom: 11px;
+    }
+
+    .q-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .q-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    .q-hint {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      margin: 0 0 12px;
+      line-height: 1.35;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .status-btn {
+      min-height: 44px;
+      border-radius: 11px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .status-btn.sel-yes {
+      background: var(--yes-text);
+      color: #FFFFFF;
+      border-color: var(--yes-text);
+    }
+
+    .status-btn.sel-maybe {
+      background: #D97706;
+      color: #FFFFFF;
+      border-color: #D97706;
+    }
+
+    .status-btn.sel-no {
+      background: var(--no-text);
+      color: #FFFFFF;
+      border-color: var(--no-text);
+    }
+
+    .status-btn.sel-pending {
+      background: var(--text-main);
+      color: #FFFFFF;
+      border-color: var(--text-main);
+    }
+
+    .q-inputs-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    @media (min-width: 600px) {
+      .q-inputs-row {
+        flex-direction: row;
+      }
+      .q-num-wrap {
+        width: 165px;
+        flex-shrink: 0;
+      }
+    }
+
+    .ios-input {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+      border-radius: 11px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg-input);
+      color: var(--text-main);
+      font-size: 16px;
+      outline: none;
+    }
+
+    .ios-input:focus {
+      background: #FFFFFF;
+      border-color: var(--primary);
+    }
+
+    .ios-input.num-highlight {
+      background: var(--primary-light);
+      border-color: rgba(47, 93, 80, 0.3);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       5. TABLA COMPARATIVA RESPONSIVA iPHONE & iPAD
+       ========================================================================== */
+    .compare-table-wrapper {
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      text-align: left;
+    }
+
+    .compare-table th, .compare-table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      border-right: 1px solid var(--border-subtle);
+      vertical-align: top;
+    }
+
+    .sticky-col-left {
+      position: sticky;
+      left: 0;
+      z-index: 15;
+      background: #FFFFFF;
+      width: 135px;
+      min-width: 135px;
+      max-width: 135px;
+      box-shadow: 2px 0 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .sticky-col-corner {
+      position: sticky;
+      left: 0;
+      z-index: 20;
+      background: var(--bg-subtle);
+      width: 135px;
+      min-width: 135px;
+      max-width: 135px;
+      box-shadow: 2px 0 6px rgba(0, 0, 0, 0.06);
+    }
+
+    @media (min-width: 720px) {
+      .sticky-col-left, .sticky-col-corner {
+        width: 210px;
+        min-width: 210px;
+        max-width: 210px;
+      }
+    }
+
+    .finca-col-th {
+      background: var(--bg-subtle);
+      min-width: 195px;
+      max-width: 230px;
+    }
+
+    .status-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .tag-yes { background: var(--yes-bg); color: var(--yes-text); }
+    .tag-maybe { background: var(--maybe-bg); color: var(--maybe-text); }
+    .tag-no { background: var(--no-bg); color: var(--no-text); }
+    .tag-pending { background: var(--bg-subtle); color: var(--text-tertiary); }
+
+    /* ==========================================================================
+       6. CALCULADORA DE PRESUPUESTO CON CONTROLES +/- TÁCTILES
+       ========================================================================== */
+    .stepper-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .stepper-row:last-child {
+      border-bottom: none;
+    }
+
+    .stepper-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stepper-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stepper-val {
+      min-width: 48px;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .budget-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13.5px;
+      padding: 5px 0;
+      color: var(--text-secondary);
+    }
+
+    .budget-line strong {
+      color: var(--text-main);
+    }
+
+    .budget-total-box {
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* ==========================================================================
+       7. MODALES NATIVOS TIPO SHEET iOS Y TOAST
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(0, 0, 0, 0.45);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: var(--sab);
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    @media (min-width: 640px) {
+      .modal-backdrop {
+        align-items: center;
+        padding: 16px;
+      }
+    }
+
+    .modal-sheet {
+      width: 100%;
+      max-width: 500px;
+      max-height: 88dvh;
+      background: var(--bg-page);
+      border-radius: 22px 22px 0 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    @media (min-width: 640px) {
+      .modal-sheet {
+        border-radius: 22px;
+      }
+    }
+
+    .modal-header {
+      background: #FFFFFF;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-body {
+      padding: 16px 18px 24px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+    }
+
+    .toast {
+      position: fixed;
+      top: calc(72px + var(--sat));
+      left: 50%;
+      transform: translateX(-50%) translateY(-12px);
+      z-index: 80;
+      background: rgba(28, 28, 30, 0.94);
+      color: #FFFFFF;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      white-space: nowrap;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR FIJA -->
+  <header class="ios-header">
+    <div class="header-inner">
+      <div>
+        <p class="header-subtitle"><span class="header-dot"></span> Boda · 30 / 31 Oct 2027</p>
+        <h1 id="headerTitle" class="header-title">Mis Fincas</h1>
+      </div>
+      <button id="headerActionBtn" class="btn-primary-sm" onclick="openNewFincaModal()">
+        <span>+ Añadir finca</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- NOTIFICACIÓN FLOTANTE -->
+  <div id="toast" class="toast">Guardado</div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main id="appContainer" class="main-container"></main>
+
+  <!-- BARRA INFERIOR TIPO TAB BAR DE iOS -->
+  <nav class="ios-tabbar" aria-label="Navegación principal">
+    <div class="tabbar-inner">
+      <button id="tab-fincas" class="tab-item active" onclick="switchTab('fincas')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+        <span>Fincas</span>
+      </button>
+      <button id="tab-preguntas" class="tab-item" onclick="switchTab('preguntas')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Preguntas</span>
+      </button>
+      <button id="tab-comparar" class="tab-item" onclick="switchTab('comparar')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+        <span>Comparar</span>
+      </button>
+      <button id="tab-presupuesto" class="tab-item" onclick="switchTab('presupuesto')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3 3 0 0 0-5 2.2v1.6a3 3 0 0 0 5 2.2M8 11h5M8 13h5"/></svg>
+        <span>Presupuesto</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MODAL AÑADIR / EDITAR FINCA -->
+  <div id="fincaModal" class="modal-backdrop">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h2 id="fincaModalTitle" style="font-family: var(--font-serif); font-size: 21px; margin: 0;">Nueva Finca</h2>
+        <button class="icon-btn-round" onclick="closeFincaModal()" aria-label="Cerrar">✕</button>
+      </div>
+      <form id="fincaForm" class="modal-body" onsubmit="saveFincaForm(event)">
+        <input type="hidden" id="fincaId">
+        <div>
+          <label class="form-label" for="fincaName">Nombre de la Finca *</label>
+          <input id="fincaName" class="ios-input" type="text" required placeholder="Ej. Masía Santa Clara">
+        </div>
+        <div>
+          <label class="form-label" for="fincaLocation">Ubicación / Zona</label>
+          <input id="fincaLocation" class="ios-input" type="text" placeholder="Ej. Bétera · a 20 min de Valencia">
+        </div>
+        <div>
+          <label class="form-label" for="fincaVisit">Fecha y hora de visita</label>
+          <input id="fincaVisit" class="ios-input" type="text" placeholder="Ej. Sábado 11:30h">
+        </div>
+        <div>
+          <label class="form-label">Valoración y Color</label>
+          <div style="display: flex; gap: 10px; align-items: center; justify-content: space-between; background: #fff; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+            <div id="starPicker" style="display: flex; gap: 6px;"></div>
+            <div id="colorPicker" style="display: flex; gap: 8px;"></div>
+          </div>
+          <input type="hidden" id="fincaRating" value="4">
+          <input type="hidden" id="fincaColor" value="#2F5D50">
+        </div>
+        <div>
+          <label class="form-label" for="fincaNotes">Sensaciones generales</label>
+          <textarea id="fincaNotes" class="ios-input" rows="3" placeholder="Trato recibido, estado de jardines, primera impresión..."></textarea>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px;">
+          <button type="button" onclick="closeFincaModal()" style="min-height: 46px; border-radius: 12px; background: var(--bg-subtle); font-weight: 600;">Cancelar</button>
+          <button type="submit" style="min-height: 46px; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 600;">Guardar Finca</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL AÑADIR PREGUNTA PERSONALIZADA -->
+  <div id="questionModal" class="modal-backdrop">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h2 style="font-family: var(--font-serif); font-size: 21px; margin: 0;">Añadir Pregunta</h2>
+        <button class="icon-btn-round" onclick="closeQuestionModal()" aria-label="Cerrar">✕</button>
+      </div>
+      <form class="modal-body" onsubmit="saveQuestionForm(event)">
+        <div>
+          <label class="form-label" for="qCatSelect">Bloque temático</label>
+          <select id="qCatSelect" class="ios-input"></select>
+        </div>
+        <div>
+          <label class="form-label" for="qTextInput">Pregunta para la finca *</label>
+          <input id="qTextInput" class="ios-input" type="text" required placeholder="Ej. ¿Permiten tirar pétalos naturales o confeti?">
+        </div>
+        <div>
+          <label class="form-label" for="qHintInput">Detalle a vigilar (opcional)</label>
+          <input id="qHintInput" class="ios-input" type="text" placeholder="Ej. Comprobar si cobran suplemento de limpieza">
+        </div>
+        <label style="display: flex; align-items: center; gap: 10px; background: #fff; padding: 12px; border-radius: 12px; border: 1px solid var(--border-subtle); font-size: 14px; font-weight: 600;">
+          <input id="qStarCheck" type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--accent);">
+          <span>Marcar como pregunta imprescindible ⭐</span>
+        </label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <button type="button" onclick="closeQuestionModal()" style="min-height: 46px; border-radius: 12px; background: var(--bg-subtle); font-weight: 600;">Cancelar</button>
+          <button type="submit" style="min-height: 46px; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 600;">Añadir</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL CONFIRMACIÓN (SIN confirm() NATIVO) -->
+  <div id="confirmModal" class="modal-backdrop" style="align-items: center; padding: 16px;">
+    <div class="modal-sheet" style="max-width: 360px; border-radius: 20px; padding: 20px; text-align: center;">
+      <h3 id="confirmTitle" style="font-family: var(--font-serif); font-size: 21px; margin: 0 0 6px;">¿Eliminar?</h3>
+      <p id="confirmDesc" style="font-size: 14px; color: var(--text-secondary); margin: 0 0 18px;"></p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <button onclick="closeConfirmModal()" style="min-height: 44px; border-radius: 12px; background: var(--bg-subtle); font-weight: 600;">Cancelar</button>
+        <button id="confirmOkBtn" style="min-height: 44px; border-radius: 12px; background: var(--no-text); color: #fff; font-weight: 600;">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       1. DATOS INICIALES, BLOQUES DE PREGUNTAS Y PERSISTENCIA SEGURA iOS
+       ========================================================================== */
+    const STORAGE_KEY = 'fincas_boda_oct2027_ios_v2';
+    const FINCA_COLORS = ['#2F5D50', '#C97A63', '#4A6FA5', '#8C6239', '#6B5B7B'];
+
+    const CATEGORIES = [
+      { id: 'fecha', name: 'Fecha y Exclusividad', icon: '📅' },
+      { id: 'celiaquia', name: 'Celiaquía y Gastronomía (Crítico)', icon: '🌾' },
+      { id: 'planb', name: 'Plan B y Espacios (Otoño)', icon: '☔' },
+      { id: 'incluye', name: 'Precios y Qué Incluye', icon: '🥂' },
+      { id: 'ocultos', name: 'Gastos Ocultos y Extras', icon: '💶' }
+    ];
+
+    const DEFAULT_QUESTIONS = [
+      // Fecha y Exclusividad
+      { id: 'q_fec_1', category: 'fecha', text: 'Disponibilidad real el 30 o 31 de octubre de 2027', hint: 'Confirmar si bloquean la fecha unos días sin compromiso', starred: true, numType: '' },
+      { id: 'q_fec_2', category: 'fecha', text: 'Exclusividad: ¿se celebra solo 1 boda al día?', hint: 'Evitar cruzarse con otra boda en baños o jardines', starred: true, numType: '' },
+      { id: 'q_fec_3', category: 'fecha', text: 'Horario límite de fiesta y recargo por hora extra', hint: 'Saber hasta qué hora dura la barra libre incluida', starred: false, numType: 'extra_hour', numLabel: '€/hora extra' },
+      { id: 'q_fec_4', category: 'fecha', text: 'Señal de reserva y condiciones de cancelación o cambio', hint: 'Importe inicial para bloquear octubre 2027', starred: false, numType: '' },
+
+      // Celiaquía y Gastronomía (Crítico)
+      { id: 'q_cel_1', category: 'celiaquia', text: '¿Cocina propia en la finca o catering externo?', hint: 'La cocina propia facilita el control estricto de alérgenos', starred: true, numType: '' },
+      { id: 'q_cel_2', category: 'celiaquia', text: 'Protocolo estricto celíacos: freidoras, hornos y zona separada', hint: 'Evitar contaminación cruzada al 100%', starred: true, numType: '' },
+      { id: 'q_cel_3', category: 'celiaquia', text: 'Menú nupcial adaptado sin sobrecoste (pan, cóctel y tarta sin gluten)', hint: 'Que la novia pueda comer lo mismo y con calidad', starred: true, numType: 'celiac_extra', numLabel: '€ extra celíaco' },
+      { id: 'q_cel_4', category: 'celiaquia', text: 'Prueba de menú incluida y para cuántas personas', hint: 'Comprobar si incluye 2 o 6 comensales gratis', starred: false, numType: '' },
+
+      // Plan B y Espacios (Otoño)
+      { id: 'q_pb_1', category: 'planb', text: 'Plan B cubierto y climatizado real para ceremonia y cóctel', hint: 'Pedir visitar físicamente el espacio alternativo', starred: true, numType: '' },
+      { id: 'q_pb_2', category: 'planb', text: 'Capacidad real del salón sin apreturas en octubre', hint: 'Que quepan cómodos todos los invitados si llueve', starred: true, numType: 'min_guests', numLabel: 'Mín. adultos' },
+      { id: 'q_pb_3', category: 'planb', text: 'Calefacción / estufas exteriores y coste de activar Plan B', hint: 'A finales de octubre refresca al caer la tarde', starred: true, numType: 'planb_cost', numLabel: '€ coste Plan B' },
+      { id: 'q_pb_4', category: 'planb', text: 'Accesibilidad y baños cómodos para personas mayores', hint: 'Evitar escaleras obligatorias o gravilla incómoda', starred: false, numType: '' },
+
+      // Precios y Qué Incluye
+      { id: 'q_inc_1', category: 'incluye', text: 'Precio menú adulto (base por cubierto)', hint: 'Anotar el precio base por persona', starred: true, numType: 'menu_adult', numLabel: '€ menú adulto' },
+      { id: 'q_inc_2', category: 'incluye', text: 'Precio menú infantil y proveedores', hint: 'Niños y menú técnico para fotógrafo/DJ', starred: false, numType: 'menu_kid', numLabel: '€ menú niño' },
+      { id: 'q_inc_3', category: 'incluye', text: 'Horas de barra libre y recena incluidas', hint: 'Verificar marcas incluidas y recena sin gluten', starred: true, numType: '' },
+      { id: 'q_inc_4', category: 'incluye', text: 'Decoración floral, minutas, mantelería y suite nupcial', hint: 'Qué entra en el precio y qué va aparte', starred: false, numType: '' },
+
+      // Gastos Ocultos y Extras
+      { id: 'q_ocu_1', category: 'ocultos', text: 'Canon de alquiler de finca aparte del menú', hint: 'Importe fijo si no va incluido en el cubierto', starred: true, numType: 'rent_cost', numLabel: '€ alquiler finca' },
+      { id: 'q_ocu_2', category: 'ocultos', text: '¿Precios con IVA incluido o +10% / +21% aparte?', hint: 'Clave para comparar presupuestos reales sin sustos', starred: true, numType: '' },
+      { id: 'q_ocu_3', category: 'ocultos', text: 'SGAE, guardarropa, limpieza baños, seguridad o descorche', hint: 'Anotar suma estimada de estos gastos fijos', starred: true, numType: 'hidden_extras', numLabel: '€ extras fijos' },
+      { id: 'q_ocu_4', category: 'ocultos', text: 'DJ/sonido obligatorio o libre + parking y acceso autobuses', hint: 'Saber si cobran canon por traer proveedores propios', starred: true, numType: 'dj_cost', numLabel: '€ DJ / sonido' }
+    ];
+
+    const INITIAL_STATE = {
+      activeTab: 'fincas',
+      selectedFincaId: 'finca_1',
+      qFilter: 'all',
+      compFilter: 'all',
+      simAdults: 120,
+      simKids: 10,
+      simExtraHours: 0,
+      simApplyVat: true,
+      fincas: [
+        {
+          id: 'finca_1',
+          name: 'Masía Santa Clara',
+          location: 'Bétera · 20 min de Valencia',
+          visit: 'Sábado 11:30h · Visitada',
+          rating: 5,
+          color: '#2F5D50',
+          notes: 'Jardín de olivos espectacular y salón acristalado climatizado. Nos dieron total seguridad con el protocolo sin gluten.'
+        },
+        {
+          id: 'finca_2',
+          name: 'Hacienda Los Olivos',
+          location: 'El Puig · Horta Nord',
+          visit: 'Domingo 12:00h · Visitada',
+          rating: 4,
+          color: '#C97A63',
+          notes: 'Muy bonita arquitectónicamente, aunque cobran alquiler de finca aparte y carpa si llueve en el cóctel.'
+        }
+      ],
+      questions: DEFAULT_QUESTIONS,
+      answers: {
+        'finca_1': {
+          'q_fec_1': { status: 'yes', note: 'Libre el sábado 30 oct 2027. Bloquean 7 días.', num: '' },
+          'q_fec_2': { status: 'yes', note: 'Exclusividad 100%, solo una boda al día.', num: '' },
+          'q_fec_3': { status: 'yes', note: 'Hasta las 03:30h incluido. Hora extra 600€.', num: '600' },
+          'q_fec_4': { status: 'yes', note: '1.500€ de reserva.', num: '' },
+          'q_cel_1': { status: 'yes', note: 'Cocina propia en la masía.', num: '' },
+          'q_cel_2': { status: 'yes', note: 'Freidora, horno y zona de emplatado exclusivos sin gluten.', num: '' },
+          'q_cel_3': { status: 'yes', note: 'Todo adaptado para la novia (pan, fritos y tarta) sin coste extra.', num: '0' },
+          'q_cel_4': { status: 'yes', note: 'Incluida para 6 personas.', num: '' },
+          'q_pb_1': { status: 'yes', note: 'Salón acristalado con vistas al jardín para ceremonia y cóctel.', num: '' },
+          'q_pb_2': { status: 'yes', note: 'Hasta 220 invitados cómodos. Mínimo 100 adultos.', num: '100' },
+          'q_pb_3': { status: 'yes', note: 'Calefacción y estufas incluidas sin coste extra.', num: '0' },
+          'q_pb_4': { status: 'yes', note: 'Todo en planta baja sin escalones.', num: '' },
+          'q_inc_1': { status: 'yes', note: '145€ + 10% IVA (cóctel largo + menú + barra libre).', num: '145' },
+          'q_inc_2': { status: 'yes', note: '45€ + 10% IVA menú infantil.', num: '45' },
+          'q_inc_3': { status: 'yes', note: '4h de barra libre primeras marcas + recena sin gluten.', num: '' },
+          'q_inc_4': { status: 'yes', note: 'Centros de mesa, minutas y suite nupcial incluidos.', num: '' },
+          'q_ocu_1': { status: 'yes', note: 'Sin canon de alquiler al superar 100 adultos.', num: '0' },
+          'q_ocu_2': { status: 'maybe', note: 'Precios base sin IVA (+10% en restauración).', num: '' },
+          'q_ocu_3': { status: 'yes', note: 'Solo SGAE (180€). Limpieza y guardarropa incluidos.', num: '180' },
+          'q_ocu_4': { status: 'maybe', note: 'DJ residente 750€. Parking amplio para buses.', num: '750' }
+        },
+        'finca_2': {
+          'q_fec_1': { status: 'maybe', note: '30 oct ocupado; libre domingo 31 oct 2027 (víspera festivo).', num: '' },
+          'q_fec_2': { status: 'yes', note: 'Evento único en todo el recinto.', num: '' },
+          'q_fec_3': { status: 'no', note: 'Cierre obligatorio a las 02:30h sin opción a ampliar.', num: '0' },
+          'q_cel_1': { status: 'maybe', note: 'Catering externo concertado (no cocina propia).', num: '' },
+          'q_cel_2': { status: 'maybe', note: 'Garantizan separación pero en cocina de campaña.', num: '' },
+          'q_cel_3': { status: 'no', note: 'Cobran +12€ de suplemento por menú celíaco.', num: '12' },
+          'q_pb_1': { status: 'maybe', note: 'Salón para banquete, pero cóctel requiere alquilar carpa.', num: '' },
+          'q_pb_2': { status: 'yes', note: 'Mínimo 120 adultos en octubre.', num: '120' },
+          'q_pb_3': { status: 'no', note: 'Alquiler de carpa transparente: 2.100€ si llueve.', num: '2100' },
+          'q_inc_1': { status: 'yes', note: '132€ + 10% IVA menú base.', num: '132' },
+          'q_inc_2': { status: 'yes', note: '50€ + 10% IVA menú infantil.', num: '50' },
+          'q_ocu_1': { status: 'no', note: 'Alquiler de finca aparte: 2.400€.', num: '2400' },
+          'q_ocu_3': { status: 'no', note: 'Guardarropa (250€), limpieza (200€) y SGAE (180€).', num: '630' },
+          'q_ocu_4': { status: 'no', note: 'Canon de 500€ si traes DJ o fotógrafo externo.', num: '500' }
+        }
+      }
+    };
+
+    let storageAvailable = true;
+    let state = loadAppState();
+
+    function loadAppState() {
+      try {
+        const raw = window.localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_STATE));
+          return JSON.parse(JSON.stringify(INITIAL_STATE));
+        }
+        return JSON.parse(raw);
+      } catch (e) {
+        storageAvailable = false;
+        return JSON.parse(JSON.stringify(INITIAL_STATE));
+      }
+    }
+
+    function saveAppState(toastMsg) {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        storageAvailable = false;
+      }
+      if (toastMsg) showToast(toastMsg);
+    }
+
+    let toastTimeout;
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => el.classList.remove('show'), 2000);
+    }
+
+    function esc(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    /* ==========================================================================
+       2. CÁLCULOS DE PROGRESO Y PRESUPUESTO REAL POR FINCA
+       ========================================================================== */
+    function computeFincaMetrics(fincaId) {
+      const ans = state.answers[fincaId] || {};
+      const total = state.questions.length;
+      let answered = 0, yes = 0, maybe = 0, no = 0;
+
+      state.questions.forEach(q => {
+        const st = ans[q.id]?.status || 'pending';
+        if (st !== 'pending') {
+          answered++;
+          if (st === 'yes') yes++;
+          else if (st === 'maybe') maybe++;
+          else if (st === 'no') no++;
+        }
+      });
+
+      const getNum = (qId) => parseFloat(ans[qId]?.num) || 0;
+
+      const menuAdult = getNum('q_inc_1');
+      const menuKid = getNum('q_inc_2');
+      const minAdults = getNum('q_pb_2');
+      const rentCost = getNum('q_ocu_1');
+      const hiddenExtras = getNum('q_ocu_3');
+      const djCost = getNum('q_ocu_4');
+      const planBCost = getNum('q_pb_3');
+      const extraHourPrice = getNum('q_fec_3');
+      const celiacExtra = getNum('q_cel_3');
+
+      const billedAdults = Math.max(state.simAdults, minAdults);
+      const menusSubtotal = (billedAdults * menuAdult) + (state.simKids * menuKid) + celiacExtra;
+      const fixedExtras = rentCost + hiddenExtras + djCost + planBCost + (state.simExtraHours * extraHourPrice);
+
+      // IVA: 10% en restauración (menús) y 21% en alquiler/extras fijos si el usuario activa IVA
+      const vatAmount = state.simApplyVat ? ((menusSubtotal * 0.10) + (fixedExtras * 0.21)) : 0;
+      const grandTotal = Math.round(menusSubtotal + fixedExtras + vatAmount);
+      const totalGuests = billedAdults + state.simKids;
+      const costPerGuest = totalGuests > 0 ? Math.round(grandTotal / totalGuests) : 0;
+
+      return {
+        total,
+        answered,
+        yes,
+        maybe,
+        no,
+        pct: total > 0 ? Math.round((answered / total) * 100) : 0,
+        menuAdult,
+        billedAdults,
+        minApplied: minAdults > state.simAdults,
+        menusSubtotal: Math.round(menusSubtotal),
+        fixedExtras: Math.round(fixedExtras),
+        vatAmount: Math.round(vatAmount),
+        grandTotal,
+        costPerGuest
+      };
+    }
+
+    /* ==========================================================================
+       3. NAVEGACIÓN ENTRE PESTAÑAS
+       ========================================================================== */
+    function switchTab(tab) {
+      state.activeTab = tab;
+      saveAppState();
+
+      document.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById('tab-' + tab);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const title = document.getElementById('headerTitle');
+      const actionBtn = document.getElementById('headerActionBtn');
+
+      if (tab === 'fincas') {
+        title.textContent = 'Mis Fincas';
+        actionBtn.style.display = 'inline-flex';
+        actionBtn.innerHTML = '<span>+ Añadir finca</span>';
+        actionBtn.onclick = openNewFincaModal;
+      } else if (tab === 'preguntas') {
+        title.textContent = 'Preguntas';
+        actionBtn.style.display = 'inline-flex';
+        actionBtn.innerHTML = '<span>+ Pregunta</span>';
+        actionBtn.onclick = openNewQuestionModal;
+      } else if (tab === 'comparar') {
+        title.textContent = 'Comparador';
+        actionBtn.style.display = 'none';
+      } else if (tab === 'presupuesto') {
+        title.textContent = 'Presupuesto';
+        actionBtn.style.display = 'none';
+      }
+
+      renderView();
+      window.scrollTo(0, 0);
+    }
+
+    function renderView() {
+      const container = document.getElementById('appContainer');
+      const warningBanner = !storageAvailable ? `
+        <div class="notice-banner">
+          <span>⚠️</span>
+          <div><strong>Modo Vista Previa detectado:</strong> Estás viendo el archivo desde Archivos/QuickLook. Ábrelo en <strong>Safari</strong> para que tus respuestas se guarden automáticamente.</div>
+        </div>
+      ` : '';
+
+      if (state.activeTab === 'fincas') {
+        container.innerHTML = warningBanner + renderFincasTab();
+      } else if (state.activeTab === 'preguntas') {
+        container.innerHTML = warningBanner + renderPreguntasTab();
+      } else if (state.activeTab === 'comparar') {
+        container.innerHTML = warningBanner + renderCompararTab();
+      } else if (state.activeTab === 'presupuesto') {
+        container.innerHTML = warningBanner + renderPresupuestoTab();
+      }
+    }
+
+    /* ==========================================================================
+       4. PESTAÑA 1: FINCAS
+       ========================================================================== */
+    function renderFincasTab() {
+      if (state.fincas.length === 0) {
+        return `
+          <div class="card" style="text-align: center; padding: 36px 20px;">
+            <div style="font-size: 38px; margin-bottom: 10px;">🏛️</div>
+            <h2 style="font-family: var(--font-serif); font-size: 22px; margin: 0 0 8px;">Empieza tu lista de fincas</h2>
+            <p style="font-size: 14px; color: var(--text-secondary); margin: 0 0 20px;">Añade las fincas que vais a visitar para vuestra boda del 30 o 31 de octubre de 2027.</p>
+            <button class="btn-primary-sm" style="min-height: 46px; padding: 0 20px;" onclick="openNewFincaModal()">+ Añadir primera finca</button>
+          </div>
+        `;
+      }
+
+      const cards = state.fincas.map(f => {
+        const m = computeFincaMetrics(f.id);
+        const stars = '★'.repeat(f.rating || 4) + '☆'.repeat(5 - (f.rating || 4));
+
+        return `
+          <article class="finca-card">
+            <div class="finca-top-bar" style="background: ${f.color || '#2F5D50'}"></div>
+            <div class="finca-body">
+              <div class="finca-header-row">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <span style="color: #D97706; font-size: 13px; letter-spacing: 1px;">${stars}</span>
+                    ${f.visit ? `<span class="badge-pill">${esc(f.visit)}</span>` : ''}
+                  </div>
+                  <h2 class="finca-name">${esc(f.name)}</h2>
+                  <p class="finca-meta">📍 ${esc(f.location || 'Ubicación por definir')}</p>
+                </div>
+                <div style="display: flex; gap: 6px;">
+                  <button class="icon-btn-round" onclick="openEditFincaModal('${f.id}')" aria-label="Editar finca">✎</button>
+                  <button class="icon-btn-round danger" onclick="askDeleteFinca('${f.id}')" aria-label="Eliminar finca">✕</button>
+                </div>
+              </div>
+
+              ${f.notes ? `<div class="finca-note-box">"${esc(f.notes)}"</div>` : ''}
+
+              <div class="finca-metrics">
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600;">
+                    <span style="color: var(--text-secondary);">Checklist</span>
+                    <span>${m.answered}/${m.total} (${m.pct}%)</span>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-fill" style="width: ${m.pct}%; background: ${f.color || '#2F5D50'}"></div>
+                  </div>
+                  <div style="font-size: 12px; font-weight: 600; display: flex; gap: 8px;">
+                    <span style="color: var(--yes-text);">✓ ${m.yes}</span>
+                    <span style="color: var(--maybe-text);">~ ${m.maybe}</span>
+                    <span style="color: var(--no-text);">✕ ${m.no}</span>
+                  </div>
+                </div>
+
+                <div class="budget-pill-box">
+                  <div style="font-size: 11px; color: var(--text-secondary); font-weight: 600;">Total real est.</div>
+                  <div style="font-size: 18px; font-weight: 700; color: var(--text-main);">
+                    ${m.grandTotal > 0 ? m.grandTotal.toLocaleString('es-ES') + ' €' : 'Sin precios'}
+                  </div>
+                  <div style="font-size: 11px; color: var(--text-tertiary);">
+                    ${m.costPerGuest > 0 ? m.costPerGuest + ' €/invitado' : 'Completa precios'}
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn-card-action" style="background: ${f.color || '#2F5D50'}" onclick="goToQuestionsFor('${f.id}')">
+                <span>Rellenar preguntas de visita →</span>
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      return `
+        <div class="info-banner">
+          <strong>💍 Boda 30/31 Oct 2027 · Protocolo Celíaco:</strong> Hemos precargado 2 fincas de ejemplo para que pruebes el comparador. Edítalas o añade las tuyas.
+        </div>
+        <div class="grid-fincas">${cards}</div>
+      `;
+    }
+
+    function goToQuestionsFor(fincaId) {
+      state.selectedFincaId = fincaId;
+      switchTab('preguntas');
+    }
+
+    /* ==========================================================================
+       5. PESTAÑA 2: PREGUNTAS (MODO VISITA)
+       ========================================================================== */
+    function renderPreguntasTab() {
+      if (state.fincas.length === 0) {
+        return `<div class="card" style="text-align:center;"><p>Añade primero una finca para apuntar respuestas.</p></div>`;
+      }
+
+      if (!state.fincas.some(f => f.id === state.selectedFincaId)) {
+        state.selectedFincaId = state.fincas[0].id;
+      }
+
+      const activeFinca = state.fincas.find(f => f.id === state.selectedFincaId);
+      const ansMap = state.answers[activeFinca.id] || {};
+      const metrics = computeFincaMetrics(activeFinca.id);
+
+      const fincaPills = state.fincas.map(f => {
+        const isSel = f.id === activeFinca.id;
+        return `
+          <button class="finca-pill ${isSel ? 'active' : ''}"
+                  style="${isSel ? 'background:' + f.color : ''}"
+                  onclick="selectVisitFinca('${f.id}')">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: ${isSel ? '#fff' : f.color};"></span>
+            <span>${esc(f.name)}</span>
+          </button>
+        `;
+      }).join('');
+
+      const filterChips = `
+        <button class="filter-chip ${state.qFilter === 'all' ? 'active' : ''}" onclick="setQFilter('all')">Todas (${state.questions.length})</button>
+        <button class="filter-chip ${state.qFilter === 'starred' ? 'active-accent' : ''}" onclick="setQFilter('starred')">⭐ Imprescindibles</button>
+        <button class="filter-chip ${state.qFilter === 'pending' ? 'active' : ''}" onclick="setQFilter('pending')">Pendientes (${metrics.total - metrics.answered})</button>
+        ${CATEGORIES.map(c => `
+          <button class="filter-chip ${state.qFilter === c.id ? 'active' : ''}" onclick="setQFilter('${c.id}')">${c.icon} ${c.name.split('(')[0].trim()}</button>
+        `).join('')}
+      `;
+
+      let filtered = state.questions;
+      if (state.qFilter === 'starred') {
+        filtered = filtered.filter(q => q.starred);
+      } else if (state.qFilter === 'pending') {
+        filtered = filtered.filter(q => (ansMap[q.id]?.status || 'pending') === 'pending');
+      } else if (state.qFilter !== 'all') {
+        filtered = filtered.filter(q => q.category === state.qFilter);
+      }
+
+      const blocksHtml = CATEGORIES.map(cat => {
+        const qs = filtered.filter(q => q.category === cat.id);
+        if (qs.length === 0) return '';
+
+        const qItems = qs.map(q => {
+          const a = ansMap[q.id] || { status: 'pending', note: '', num: '' };
+          const st = a.status || 'pending';
+
+          return `
+            <div class="q-card">
+              <div class="q-title-row">
+                <h3 class="q-text">${esc(q.text)}</h3>
+                <button onclick="toggleStar('${q.id}')" style="font-size: 18px; min-width: 32px; min-height: 32px;" aria-label="Marcar imprescindible">
+                  ${q.starred ? '⭐' : '☆'}
+                </button>
+              </div>
+              ${q.hint ? `<p class="q-hint">💡 ${esc(q.hint)}</p>` : ''}
+
+              <div class="status-grid">
+                <button class="status-btn ${st === 'yes' ? 'sel-yes' : ''}" onclick="setAnsStatus('${activeFinca.id}', '${q.id}', 'yes')">
+                  <span>✓ Sí</span>
+                </button>
+                <button class="status-btn ${st === 'maybe' ? 'sel-maybe' : ''}" onclick="setAnsStatus('${activeFinca.id}', '${q.id}', 'maybe')">
+                  <span>~ Parcial</span>
+                </button>
+                <button class="status-btn ${st === 'no' ? 'sel-no' : ''}" onclick="setAnsStatus('${activeFinca.id}', '${q.id}', 'no')">
+                  <span>✕ No</span>
+                </button>
+                <button class="status-btn ${st === 'pending' ? 'sel-pending' : ''}" onclick="setAnsStatus('${activeFinca.id}', '${q.id}', 'pending')">
+                  <span>• Pend.</span>
+                </button>
+              </div>
+
+              <div class="q-inputs-row">
+                <input class="ios-input" type="text"
+                       value="${esc(a.note || '')}"
+                       onchange="setAnsNote('${activeFinca.id}', '${q.id}', this.value)"
+                       placeholder="Apunta lo que te digan en la visita...">
+                ${q.numType ? `
+                  <div class="q-num-wrap">
+                    <input class="ios-input num-highlight" type="number" step="any" inputmode="decimal"
+                           value="${esc(a.num || '')}"
+                           onchange="setAnsNum('${activeFinca.id}', '${q.id}', this.value)"
+                           placeholder="${esc(q.numLabel || '€')}">
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <section>
+            <div class="cat-header">
+              <div class="cat-icon">${cat.icon}</div>
+              <h2 class="cat-title">${cat.name}</h2>
+            </div>
+            ${qItems}
+          </section>
+        `;
+      }).join('');
+
+      return `
+        <div class="h-scroll-row" aria-label="Seleccionar finca">${fincaPills}</div>
+        <div class="card" style="padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+          <div style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 600;">
+              <span>${esc(activeFinca.name)}</span>
+              <span style="color: var(--primary);">${metrics.answered}/${metrics.total} respondidas</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" style="width: ${metrics.pct}%; background: ${activeFinca.color};"></div>
+            </div>
+          </div>
+        </div>
+        <div class="h-scroll-row" aria-label="Filtrar preguntas">${filterChips}</div>
+        ${blocksHtml || '<div class="card" style="text-align:center; color: var(--text-secondary);">No hay preguntas en este filtro.</div>'}
+      `;
+    }
+
+    function selectVisitFinca(id) {
+      state.selectedFincaId = id;
+      saveAppState();
+      renderView();
+    }
+
+    function setQFilter(f) {
+      state.qFilter = f;
+      renderView();
+    }
+
+    function getOrCreateAns(fincaId, qId) {
+      if (!state.answers[fincaId]) state.answers[fincaId] = {};
+      if (!state.answers[fincaId][qId]) state.answers[fincaId][qId] = { status: 'pending', note: '', num: '' };
+      return state.answers[fincaId][qId];
+    }
+
+    function setAnsStatus(fincaId, qId, status) {
+      const a = getOrCreateAns(fincaId, qId);
+      a.status = status;
+      saveAppState('Guardado');
+      renderView();
+    }
+
+    function setAnsNote(fincaId, qId, val) {
+      const a = getOrCreateAns(fincaId, qId);
+      a.note = val;
+      saveAppState('Nota guardada');
+    }
+
+    function setAnsNum(fincaId, qId, val) {
+      const a = getOrCreateAns(fincaId, qId);
+      a.num = val;
+      saveAppState('Importe guardado');
+    }
+
+    function toggleStar(qId) {
+      const q = state.questions.find(item => item.id === qId);
+      if (q) {
+        q.starred = !q.starred;
+        saveAppState(q.starred ? 'Marcada imprescindible ⭐' : 'Desmarcada');
+        renderView();
+      }
+    }
+
+    /* ==========================================================================
+       6. PESTAÑA 3: COMPARADOR LADO A LADO (iPHONE & iPAD)
+       ========================================================================== */
+    function renderCompararTab() {
+      if (state.fincas.length === 0) {
+        return `<div class="card" style="text-align:center;"><p>Añade al menos una finca para comparar.</p></div>`;
+      }
+
+      let qs = [...state.questions];
+      if (state.compFilter === 'starred') {
+        qs = qs.filter(q => q.starred);
+      } else if (state.compFilter === 'diff') {
+        qs = qs.filter(q => {
+          const set = new Set(state.fincas.map(f => state.answers[f.id]?.[q.id]?.status || 'pending'));
+          return set.size > 1;
+        });
+      }
+
+      const headersHtml = state.fincas.map(f => {
+        const m = computeFincaMetrics(f.id);
+        return `
+          <th class="finca-col-th">
+            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+              <span style="width: 10px; height: 10px; border-radius: 50%; background: ${f.color}; flex-shrink: 0;"></span>
+              <span style="font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--text-main);">${esc(f.name)}</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;">
+              <span style="color: var(--yes-text); font-weight: 700;">${m.yes} Sí</span> ·
+              <span style="color: var(--maybe-text); font-weight: 700;">${m.maybe} Parc.</span> ·
+              <span style="color: var(--no-text); font-weight: 700;">${m.no} No</span>
+            </div>
+            <div style="background: #fff; padding: 6px 8px; border-radius: 9px; border: 1px solid var(--border-subtle); font-size: 12px; display: flex; justify-content: space-between;">
+              <span style="color: var(--text-secondary);">Total est.</span>
+              <strong>${m.grandTotal > 0 ? m.grandTotal.toLocaleString('es-ES') + ' €' : '—'}</strong>
+            </div>
+          </th>
+        `;
+      }).join('');
+
+      const rowsHtml = qs.map(q => {
+        const cells = state.fincas.map(f => {
+          const a = state.answers[f.id]?.[q.id] || { status: 'pending', note: '', num: '' };
+          let tag = '<span class="status-tag tag-pending">• Pendiente</span>';
+          let bg = '';
+          if (a.status === 'yes') {
+            tag = '<span class="status-tag tag-yes">✓ Sí</span>';
+            bg = 'background: rgba(229, 244, 236, 0.35);';
+          } else if (a.status === 'maybe') {
+            tag = '<span class="status-tag tag-maybe">~ Parcial</span>';
+            bg = 'background: rgba(254, 243, 220, 0.35);';
+          } else if (a.status === 'no') {
+            tag = '<span class="status-tag tag-no">✕ No</span>';
+            bg = 'background: rgba(253, 232, 232, 0.35);';
+          }
+
+          return `
+            <td style="${bg}">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 5px;">
+                ${tag}
+                ${a.num !== '' && a.num !== undefined ? `<span style="font-size: 12px; font-weight: 700; background: #fff; padding: 2px 6px; border-radius: 6px; border: 1px solid var(--border-subtle);">${esc(a.num)} €</span>` : ''}
+              </div>
+              <div style="font-size: 12.5px; color: var(--text-main); line-height: 1.35;">
+                ${a.note ? esc(a.note) : '<span style="color: var(--text-tertiary);">Sin notas</span>'}
+              </div>
+            </td>
+          `;
+        }).join('');
+
+        return `
+          <tr>
+            <td class="sticky-col-left">
+              <div style="font-size: 12.5px; font-weight: 600; line-height: 1.3; color: var(--text-main);">
+                ${q.starred ? '⭐ ' : ''}${esc(q.text)}
+              </div>
+            </td>
+            ${cells}
+          </tr>
+        `;
+      }).join('');
+
+      return `
+        <div class="h-scroll-row">
+          <button class="filter-chip ${state.compFilter === 'all' ? 'active' : ''}" onclick="setCompFilter('all')">Todas las preguntas (${state.questions.length})</button>
+          <button class="filter-chip ${state.compFilter === 'starred' ? 'active-accent' : ''}" onclick="setCompFilter('starred')">Solo imprescindibles ⭐</button>
+          <button class="filter-chip ${state.compFilter === 'diff' ? 'active' : ''}" onclick="setCompFilter('diff')">Solo diferencias</button>
+        </div>
+
+        <div class="compare-table-wrapper">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th class="sticky-col-corner" style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary);">Criterio</th>
+                ${headersHtml}
+              </tr>
+            </thead>
+            <tbody>
+              ${rowsHtml || `<tr><td colspan="${state.fincas.length + 1}" style="text-align:center; padding: 24px; color: var(--text-secondary);">No hay filas que coincidan con el filtro.</td></tr>`}
+            </tbody>
+          </table>
+        </div>
+        <p style="text-align: center; font-size: 12px; color: var(--text-tertiary); margin-top: 10px;">
+          ← Desliza la tabla horizontalmente para comparar todas las fincas →
+        </p>
+      `;
+    }
+
+    function setCompFilter(f) {
+      state.compFilter = f;
+      renderView();
+    }
+
+    /* ==========================================================================
+       7. PESTAÑA 4: CALCULADORA DE PRESUPUESTO REAL Y EXPORTAR
+       ========================================================================== */
+    function renderPresupuestoTab() {
+      const fincaBreakdowns = state.fincas.map(f => {
+        const m = computeFincaMetrics(f.id);
+        return `
+          <div class="card">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 11px; height: 11px; border-radius: 50%; background: ${f.color};"></span>
+                <h3 style="font-family: var(--font-serif); font-size: 19px; margin: 0;">${esc(f.name)}</h3>
+              </div>
+              <span class="badge-pill">${m.costPerGuest} €/invitado</span>
+            </div>
+
+            <div class="budget-line">
+              <span>Menús (${m.billedAdults} adultos + ${state.simKids} niños)</span>
+              <strong>${m.menusSubtotal.toLocaleString('es-ES')} €</strong>
+            </div>
+            <div class="budget-line">
+              <span>Alquiler finca, DJ, Plan B y gastos ocultos</span>
+              <strong>${m.fixedExtras.toLocaleString('es-ES')} €</strong>
+            </div>
+            <div class="budget-line">
+              <span>IVA estimado (10% menú / 21% extras)</span>
+              <strong>${state.simApplyVat ? m.vatAmount.toLocaleString('es-ES') + ' €' : 'No aplicado'}</strong>
+            </div>
+
+            ${m.minApplied ? `<p style="font-size: 12px; color: var(--maybe-text); background: var(--maybe-bg); padding: 6px 10px; border-radius: 8px; margin: 6px 0 0;">⚠️ Se factura el mínimo exigido de ${m.billedAdults} adultos.</p>` : ''}
+
+            <div class="budget-total-box">
+              <span style="font-size: 13px; font-weight: 700; color: var(--primary);">TOTAL REAL ESTIMADO</span>
+              <span style="font-size: 20px; font-weight: 800; color: var(--primary);">${m.grandTotal.toLocaleString('es-ES')} €</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="card">
+          <h2 style="font-family: var(--font-serif); font-size: 20px; margin: 0 0 8px;">Simulador de Invitados y Extras</h2>
+          <div class="stepper-row">
+            <div>
+              <div style="font-weight: 600; font-size: 15px;">Invitados adultos</div>
+              <div style="font-size: 12px; color: var(--text-secondary);">Ajusta según tu lista</div>
+            </div>
+            <div class="stepper-controls">
+              <button class="stepper-btn" onclick="adjustSim('simAdults', -5)">−</button>
+              <span class="stepper-val">${state.simAdults}</span>
+              <button class="stepper-btn" onclick="adjustSim('simAdults', 5)">+</button>
+            </div>
+          </div>
+
+          <div class="stepper-row">
+            <div>
+              <div style="font-weight: 600; font-size: 15px;">Menús infantiles</div>
+              <div style="font-size: 12px; color: var(--text-secondary);">Niños asistentes</div>
+            </div>
+            <div class="stepper-controls">
+              <button class="stepper-btn" onclick="adjustSim('simKids', -1)">−</button>
+              <span class="stepper-val">${state.simKids}</span>
+              <button class="stepper-btn" onclick="adjustSim('simKids', 1)">+</button>
+            </div>
+          </div>
+
+          <div class="stepper-row">
+            <div>
+              <div style="font-weight: 600; font-size: 15px;">Horas extra de barra libre</div>
+              <div style="font-size: 12px; color: var(--text-secondary);">Ampliación de fiesta</div>
+            </div>
+            <div class="stepper-controls">
+              <button class="stepper-btn" onclick="adjustSim('simExtraHours', -1)">−</button>
+              <span class="stepper-val">${state.simExtraHours}h</span>
+              <button class="stepper-btn" onclick="adjustSim('simExtraHours', 1)">+</button>
+            </div>
+          </div>
+
+          <div class="stepper-row">
+            <div>
+              <div style="font-weight: 600; font-size: 15px;">Sumar IVA (10% / 21%)</div>
+              <div style="font-size: 12px; color: var(--text-secondary);">Si la finca da precios sin IVA</div>
+            </div>
+            <button onclick="toggleSimVat()" style="min-height: 40px; padding: 0 14px; border-radius: 11px; font-weight: 700; font-size: 13px; background: ${state.simApplyVat ? 'var(--primary)' : 'var(--bg-subtle)'}; color: ${state.simApplyVat ? '#fff' : 'var(--text-main)'};">
+              ${state.simApplyVat ? 'IVA Sumado ✓' : 'Sin IVA'}
+            </button>
+          </div>
+        </div>
+
+        ${fincaBreakdowns}
+
+        <div class="card">
+          <h3 style="font-family: var(--font-serif); font-size: 19px; margin: 0 0 6px;">Compartir y Copia de Seguridad</h3>
+          <p style="font-size: 13px; color: var(--text-secondary); margin: 0 0 12px;">Envía el resumen por WhatsApp o guarda un respaldo JSON para pasar tus datos entre iPhone y iPad.</p>
+          <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+            <button onclick="copySummaryWhatsApp()" style="min-height: 46px; border-radius: 12px; background: #1B6B43; color: #fff; font-weight: 600;">
+              📋 Copiar resumen para WhatsApp
+            </button>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <button onclick="exportJsonBackup()" style="min-height: 44px; border-radius: 12px; background: var(--bg-subtle); font-weight: 600; font-size: 14px;">
+                ↓ Exportar JSON
+              </button>
+              <label style="min-height: 44px; border-radius: 12px; background: var(--bg-subtle); font-weight: 600; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                ↑ Importar JSON
+                <input type="file" accept=".json" onchange="importJsonBackup(event)" style="display: none;">
+              </label>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function adjustSim(key, delta) {
+      state[key] = Math.max(0, (state[key] || 0) + delta);
+      saveAppState();
+      renderView();
+    }
+
+    function toggleSimVat() {
+      state.simApplyVat = !state.simApplyVat;
+      saveAppState();
+      renderView();
+    }
+
+    function copySummaryWhatsApp() {
+      let out = `💍 *COMPARADOR FINCAS BODA (30/31 Oct 2027)*\n`;
+      out += `👥 ${state.simAdults} adultos + ${state.simKids} niños (${state.simApplyVat ? 'con IVA' : 'sin IVA'})\n\n`;
+
+      state.fincas.forEach(f => {
+        const m = computeFincaMetrics(f.id);
+        const ans = state.answers[f.id] || {};
+        out += `🏛️ *${f.name}* (${'★'.repeat(f.rating)})\n`;
+        out += `💰 Total real est.: *${m.grandTotal.toLocaleString('es-ES')} €* (${m.costPerGuest} €/inv.)\n`;
+        out += `🌾 Celiaquía: ${ans['q_cel_2']?.note || 'Pendiente'}\n`;
+        out += `☔ Plan B: ${ans['q_pb_1']?.note || 'Pendiente'}\n`;
+        out += `✅ ${m.yes} Sí | ⚠️ ${m.maybe} Parcial | ❌ ${m.no} No\n\n`;
+      });
+
+      const ta = document.createElement('textarea');
+      ta.value = out;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast('¡Copiado! Pégalo en WhatsApp');
+      } catch (e) {
+        showToast('No se pudo copiar');
+      }
+      document.body.removeChild(ta);
+    }
+
+    function exportJsonBackup() {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'fincas-boda-oct2027.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Archivo JSON descargado');
+    }
+
+    function importJsonBackup(ev) {
+      const file = ev.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (parsed && Array.isArray(parsed.fincas)) {
+            state = parsed;
+            saveAppState('Datos importados ✓');
+            renderView();
+          }
+        } catch (err) {
+          showToast('Archivo JSON no válido');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    /* ==========================================================================
+       8. MODALES CRUD (FINCAS Y PREGUNTAS)
+       ========================================================================== */
+    function renderPickers(rating, color) {
+      document.getElementById('starPicker').innerHTML = [1, 2, 3, 4, 5].map(n => `
+        <button type="button" onclick="setModalRating(${n})" style="font-size: 22px; color: ${n <= rating ? '#D97706' : '#D1D1D6'};">★</button>
+      `).join('');
+
+      document.getElementById('colorPicker').innerHTML = FINCA_COLORS.map(c => `
+        <button type="button" onclick="setModalColor('${c}')" style="width: 24px; height: 24px; border-radius: 50%; background: ${c}; outline: ${c === color ? '2px solid #1C1C1E' : 'none'}; outline-offset: 2px;"></button>
+      `).join('');
+    }
+
+    function setModalRating(r) {
+      document.getElementById('fincaRating').value = r;
+      renderPickers(r, document.getElementById('fincaColor').value);
+    }
+
+    function setModalColor(c) {
+      document.getElementById('fincaColor').value = c;
+      renderPickers(parseInt(document.getElementById('fincaRating').value, 10), c);
+    }
+
+    function openNewFincaModal() {
+      document.getElementById('fincaModalTitle').textContent = 'Nueva Finca';
+      document.getElementById('fincaId').value = '';
+      document.getElementById('fincaName').value = '';
+      document.getElementById('fincaLocation').value = '';
+      document.getElementById('fincaVisit').value = '';
+      document.getElementById('fincaNotes').value = '';
+      const defColor = FINCA_COLORS[state.fincas.length % FINCA_COLORS.length];
+      document.getElementById('fincaRating').value = 4;
+      document.getElementById('fincaColor').value = defColor;
+      renderPickers(4, defColor);
+      document.getElementById('fincaModal').classList.add('open');
+    }
+
+    function openEditFincaModal(id) {
+      const f = state.fincas.find(x => x.id === id);
+      if (!f) return;
+      document.getElementById('fincaModalTitle').textContent = 'Editar Finca';
+      document.getElementById('fincaId').value = f.id;
+      document.getElementById('fincaName').value = f.name;
+      document.getElementById('fincaLocation').value = f.location || '';
+      document.getElementById('fincaVisit').value = f.visit || '';
+      document.getElementById('fincaNotes').value = f.notes || '';
+      document.getElementById('fincaRating').value = f.rating || 4;
+      document.getElementById('fincaColor').value = f.color || '#2F5D50';
+      renderPickers(f.rating || 4, f.color || '#2F5D50');
+      document.getElementById('fincaModal').classList.add('open');
+    }
+
+    function closeFincaModal() {
+      document.getElementById('fincaModal').classList.remove('open');
+    }
+
+    function saveFincaForm(e) {
+      e.preventDefault();
+      const id = document.getElementById('fincaId').value;
+      const item = {
+        id: id || 'finca_' + Date.now(),
+        name: document.getElementById('fincaName').value.trim(),
+        location: document.getElementById('fincaLocation').value.trim(),
+        visit: document.getElementById('fincaVisit').value.trim(),
+        rating: parseInt(document.getElementById('fincaRating').value, 10) || 4,
+        color: document.getElementById('fincaColor').value || '#2F5D50',
+        notes: document.getElementById('fincaNotes').value.trim()
+      };
+
+      if (id) {
+        const idx = state.fincas.findIndex(x => x.id === id);
+        if (idx !== -1) state.fincas[idx] = item;
+        showToast('Finca actualizada');
+      } else {
+        state.fincas.push(item);
+        state.selectedFincaId = item.id;
+        showToast('Finca añadida');
+      }
+
+      saveAppState();
+      closeFincaModal();
+      renderView();
+    }
+
+    function openNewQuestionModal() {
+      const sel = document.getElementById('qCatSelect');
+      sel.innerHTML = CATEGORIES.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+      document.getElementById('qTextInput').value = '';
+      document.getElementById('qHintInput').value = '';
+      document.getElementById('qStarCheck').checked = true;
+      document.getElementById('questionModal').classList.add('open');
+    }
+
+    function closeQuestionModal() {
+      document.getElementById('questionModal').classList.remove('open');
+    }
+
+    function saveQuestionForm(e) {
+      e.preventDefault();
+      state.questions.push({
+        id: 'q_custom_' + Date.now(),
+        category: document.getElementById('qCatSelect').value,
+        text: document.getElementById('qTextInput').value.trim(),
+        hint: document.getElementById('qHintInput').value.trim(),
+        starred: document.getElementById('qStarCheck').checked,
+        numType: ''
+      });
+      saveAppState('Pregunta añadida');
+      closeQuestionModal();
+      renderView();
+    }
+
+    function askDeleteFinca(id) {
+      const f = state.fincas.find(x => x.id === id);
+      if (!f) return;
+      document.getElementById('confirmTitle').textContent = '¿Eliminar finca?';
+      document.getElementById('confirmDesc').textContent = `Se borrará "${f.name}" y todas sus respuestas.`;
+      document.getElementById('confirmOkBtn').onclick = () => {
+        state.fincas = state.fincas.filter(x => x.id !== id);
+        delete state.answers[id];
+        if (state.selectedFincaId === id && state.fincas.length > 0) {
+          state.selectedFincaId = state.fincas[0].id;
+        }
+        saveAppState('Finca eliminada');
+        closeConfirmModal();
+        renderView();
+      };
+      document.getElementById('confirmModal').classList.add('open');
+    }
+
+    function closeConfirmModal() {
+      document.getElementById('confirmModal').classList.remove('open');
+    }
+
+    // Arranque inicial
+    switchTab(state.activeTab || 'fincas');
+  </script>
+</body>
+</html>
